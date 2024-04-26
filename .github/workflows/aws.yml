@@ -31,10 +31,16 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            sudo apt install postgresql
+            sudo apt install libpq-dev
+            
             cd ${{ secrets.TARGET_DIR }}
+
             python3 -m venv my_venv
             source my_venv/bin/activate
+
             pip3 install -r requirements.txt
+            
             python3 manage.py makemigrations
             python3 manage.py migrate
             python3 manage.py runserver 80
