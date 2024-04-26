@@ -31,6 +31,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            cp env_example .env
             sudo apt install postgresql
             sudo apt install libpq-dev
             
@@ -40,7 +41,7 @@ jobs:
             source my_venv/bin/activate
 
             pip3 install -r requirements.txt
-            
+
             python3 manage.py makemigrations
             python3 manage.py migrate
             python3 manage.py runserver 80
