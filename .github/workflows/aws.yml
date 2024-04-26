@@ -44,6 +44,6 @@ jobs:
 
             python3 manage.py makemigrations
             python3 manage.py migrate
-            pm2 start python3 manage.py runserver 0.0.0.0:8000 --name "django-server" --watch
+            pm2 start start_server.sh --name "django-server" --watch
 
             sleep 5
