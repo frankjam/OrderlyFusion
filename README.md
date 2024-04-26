@@ -13,9 +13,9 @@ The Customer and Orders platform offers a set of APIs to interact with customer 
 ## Without Docker
 
 ### Prerequisites
-- Python 3 installed on your system
+- Python3 installed on your system
 - PostgreSQL installed and running on your system
-- pip installed
+- pip3 installed
 
 To set up the platform locally, follow these steps:
 
@@ -23,26 +23,30 @@ To set up the platform locally, follow these steps:
 
     ```bash
     git clone https://github.com/frankjam/OrderlyFusion.git
+
+    cd OrderlyFusion
     ```
 
 2. Install dependencies:
 
     ```bash
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     ```
 
 3. Apply migrations:
     ```bash 
-    python manage.py migrate
+    python3 manage.py makemigrations
+    python3 manage.py migrate
     ```
 
 4. Run the server:
 
     ```bash
-    python manage.py runserver
+    python3 manage.py runserver
     ```
 
-4. Access the API documentation at `http://localhost:8000/docs/` in your browser.
+4. . Access the development server:
+The server will be running inside the Docker container. You can access it at http://localhost:8000/
 
 ## With Docker
 
