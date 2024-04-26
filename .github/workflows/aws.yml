@@ -33,7 +33,7 @@ jobs:
           script: |
             cd ${{ secrets.TARGET_DIR }}
             python3 -m venv my_venv
-            source venv/bin/activate
+            source my_venv/bin/activate
             pip3 install -r requirements.txt
             python3 manage.py makemigrations
             python3 manage.py migrate
