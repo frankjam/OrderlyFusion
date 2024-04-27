@@ -1,4 +1,4 @@
-# Customer and Orders Platform API 
+# Customer and Orders Platform API
 
 Documentation
 
@@ -13,6 +13,7 @@ The Customer and Orders platform offers a set of APIs to interact with customer 
 ## Without Docker
 
 ### Prerequisites
+
 - Python3 installed on your system
 - PostgreSQL installed and running on your system
 - pip3 installed
@@ -34,7 +35,8 @@ To set up the platform locally, follow these steps:
     ```
 
 3. Apply migrations:
-    ```bash 
+
+    ```bash
     python3 manage.py makemigrations
     python3 manage.py migrate
     ```
@@ -46,41 +48,89 @@ To set up the platform locally, follow these steps:
     ```
 
 4. . Access the development server:
-The server will be running inside the Docker container. You can access it at http://localhost:8000/
+The server will be running inside the Docker container. You can access it at <http://localhost:8000/>
 
 ## With Docker
 
 ### Prerequisites
+
 - Docker installed on your system
 - Docker Compose installed on your system
 
 Setup Instructions
 
 1. Clone the repository:
+
  ```bash
     git clone https://github.com/frankjam/OrderlyFusion.git
     
     cd OrderlyFusion
 ```
+
 2. Build the Docker image:
+
 ```bash
 docker-compose build
 ```
 
 3. Start the Docker containers:
+
 ```
 docker-compose up -d
 ```
 
 4. Access the development server:
-The server will be running inside the Docker container. You can access it at http://localhost:8000/
+The server will be running inside the Docker container. You can access it at <http://localhost:8000/>
 
 5. To stop the containers, run:
-```bash 
+
+```bash
 docker-compose down
 ```
 
 ## API Endpoints
+
+### Acquire API Token
+
+    - Method: POST
+    - URL: `api-token-auth/`
+
+### Request
+
+   ```json
+        {   
+            "username": "username",
+            "password": "user_password"
+        }
+   ```
+
+This will return a token which you need to include in the header of each request as follows:
+Authorization: Token <your_token>
+
+### Response
+
+ ```
+    {
+        "token":"dca751e7b84bbdff62d4de72c727d54b445e4e97",
+        "id": 1
+    }
+```
+### Format to query the Customer and Orders API
+
+To format a request with the authentication token included in the headers using cURL, you can follow this template:
+```
+curl -X <HTTP_METHOD> \
+  -H "Authorization: Token <your_token>" \
+  -H "Content-Type: application/json" \
+  -d '<request_body>' \
+  <API_ENDPOINT_URL>
+```
+Here's a breakdown of the components:
+
+- <HTTP_METHOD>: Replace this with the HTTP method you're using for the request (e.g., GET, POST, PUT, DELETE).
+- <your_token>: Replace this with your actual authentication token obtained from your authentication process.
+- <request_body>: If your request includes a request body (for POST or PUT requests), replace this with the JSON data you want to send in the request body.
+- <API_ENDPOINT_URL>: Replace this with the URL of the API endpoint you're targeting.
 
 ### Customers API
 
@@ -105,7 +155,8 @@ The Orders API allows you to manage order data.
 ## Examples
 
 Here are some examples of how to use the platform's APIs:
-## Customers api examples 
+
+## Customers api examples
 
 ## 1. List all customers
 
@@ -138,15 +189,15 @@ Here are some examples of how to use the platform's APIs:
 ]
 ```
 
-## 2. Create a new customer:
+## 2. Create a new customer
 
 ### Request
 
     - Method: POST
     - URL: `/api/v1/customers`
 
-   ### Request 
-    
+### Request
+
    ```json
         {   
             "id": 1,
@@ -157,17 +208,18 @@ Here are some examples of how to use the platform's APIs:
         }
    ```
 
-   ### Response
+### Response
 
-   #### Success (HTTP 200 OK)
-   ``` 
+#### Success (HTTP 200 OK)
+
+   ```
     "Customer added successfully"
    ```
-   
 
 ## 3.Update a Customer
 
 ### Request
+
 - Method: PUT
 - URL: `/api/v1/customers/<id>/`
 
@@ -190,7 +242,7 @@ Replace `<id>` with the ID of the customer to be updated.
 
 - Method: DELETE
 - URL: `/api/v1/customers/<id>/`
- 
+
     Replace `<id>` with the ID of the customer to be deleted.
 
 ### Response
@@ -201,8 +253,9 @@ Replace `<id>` with the ID of the customer to be updated.
 Deleted successfully
 ```
 
-## Orders examples 
-### 1. List all orders 
+## Orders examples
+
+### 1. List all orders
 
 ### Request
 
@@ -233,15 +286,15 @@ Deleted successfully
 ]
 ```
 
-## 2. Create a new order:
+## 2. Create a new order
 
 ### Request
 
     - Method: POST
     - URL: `/api/v1/orders`
 
-   ### Request 
-    
+### Request
+
    ```json
         {   
             "item": "book",
@@ -250,16 +303,18 @@ Deleted successfully
         }
    ```
 
-   ### Response
+### Response
 
-   #### Success (HTTP 200 OK)
-   ``` 
+#### Success (HTTP 200 OK)
+
+   ```
     "Order added successfully"
    ```
-   
+
 ## 3.Update order
 
 ### Request
+
 - Method: PUT
 - URL: `/api/v1/orders/<id>/`
 
@@ -274,13 +329,14 @@ Replace `<id>` with the ID of the order to be updated.
             "customer": 1
         }
 ```
+
 ## 4. Delete order
 
 ### Request
 
 - Method: DELETE
 - URL: `/api/v1/orders/<id>/`
- 
+
     Replace `<id>` with the ID of the order to be deleted.
 
 ### Response
@@ -290,7 +346,6 @@ Replace `<id>` with the ID of the order to be updated.
 ```plaintext
 Deleted successfully
 ```
-
 
 ## Contributing
 
