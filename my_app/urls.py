@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('CustomersApp.urls')),
     path('', include('OrdersApp.urls')),  
-    path('api-token-auth/', views.CustomObtainAuthToken.as_view(), name='api_token_auth'),
+    path('api-token-auth', views.CustomObtainAuthToken.as_view(), name='api_token_auth'),
 ]
