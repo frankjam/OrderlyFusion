@@ -22,15 +22,16 @@ class OrdersAPIView(APIView):
     def post(self, request):
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            self.send_sms("Order Added Successfully")
+            order = serializer.save()
+            customer_phone_number = order.customer.phone
+            self.send_sms("Order Added Successfully", customer_phone_number)
             return Response("Order Added Successfully", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def send_sms(self, message):
+    def send_sms(self, message, phone_number):
         try:
             africastalking.initialize(environ.get("AFRICAS_TALKING_USERNAME"), environ.get("AFRICAS_TALKING_API_KEY"))
-            africastalking.SMS.send(message, ["+254715592073"])
+            africastalking.SMS.send(message, [phone_number])
         except Exception as e:
             print(f"Error sending SMS: {e}")
 
