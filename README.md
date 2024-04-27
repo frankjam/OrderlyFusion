@@ -48,7 +48,7 @@ To set up the platform locally, follow these steps:
     ```
 
 4. . Access the development server:
-The server will be running inside the Docker container. You can access it at <http://localhost:8000/>
+The server will be running. You can access it at <http://localhost:8000/>
 
 ## With Docker
 
